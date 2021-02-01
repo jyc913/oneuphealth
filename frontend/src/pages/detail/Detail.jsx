@@ -1,63 +1,72 @@
-import React, { Component } from 'react';
+import React, {  useEffect } from 'react';
 import { connect } from 'react-redux';
-// import { addToCart } from '../../reducers/cartActions';
- class Home extends Component{
-    
-    // handleClick = (id)=>{
-    //     this.props.addToCart(id); 
-    // }
+import * as PropTypes from 'prop-types'
+import { fetchBundleData} from '../../reducers/users/users.reducer'
 
-    // componentDidMount() {
-    //     // const user = await authenticate(req, res);
-    //     const user='hello world';
-  
-    //   let dashboard = await fetch(`http://localhost:3000/api/dashboard`, {
-    //     credentials: 'include',
-    //   }).then(r => r.json());
-    //   console.log('this is ressss',user);
-    //   return { dashboard, user };
-   
-    //   }
-
-    render(){
-        let itemList = this.props.items.map(item=>{
-            return(
-                <div className="card" key={item.id}>
-                        <div className="card-image">
-                            <img src={item.img} alt={item.title}/>
-                            <span className="card-title">{item.title}</span>
-                            {/* <span to="/detail" className="btn-floating halfway-fab waves-effect waves-light red" onClick={()=>{this.handleClick(item.id)}}><i className="material-icons">add</i></span> */}
-                        </div>
-
-                        <div className="card-content">
-                            <p>{item.desc}</p>
-                            <p><b>Price: {item.price}$</b></p>
-                        </div>
-                 </div>
-
-            )
-        })
+const Detail =props=>{
+    const {usersReducer,getBundleData} =props;
+    let currentUserInfo= {};
+    let getResultSuccess=false;
+    useEffect(()=>{
+        if(!getResultSuccess){
+            getBundleData();
+        }
+    },[getResultSuccess])
+    if(usersReducer !==undefined && usersReducer.bundle !==undefined && usersReducer.bundle.length >0){
+        getResultSuccess=true;
+        currentUserInfo=usersReducer.bundle[0].entry[0].resource;
+        console.log('info', currentUserInfo);
+    }
+    function patientDetails(){
+       
+        let providerList=currentUserInfo.careProvider.map(provider=>{
+            return (<><p>{provider.display}</p></>);
+        });
+        let name=currentUserInfo.name.map(item=>{
+            if(item.use ==='official'){
+                return (<><p>{item.text}</p></>);
+            }        
+        });
+        let telecom=currentUserInfo.telecom.map(item=>{
+                return (<><p>{item.use}, {item.system}, {item.value}</p></>);
+            });  
+        let contact=currentUserInfo.contact.map(contact=>{
+           return (<><p>{contact.name.text}</p><p>{contact.address.text}</p><p>{contact.gender}, {contact.relationship[0].text}</p></>);
+        });
 
         return(
             <div className="container">
-                <h3 className="center">Details</h3>
-                <div className="box">
-                    {itemList}
-                </div>
+                <h3 className="center">Patient Info</h3>
+                Name: {name}
+                Administrative Gender:  <p>  {currentUserInfo.gender}</p>
+                Birth Date:   <p>  {currentUserInfo.birthDate}</p>
+                Marital Status:  <p>  {currentUserInfo.maritalStatus.text}</p>
+                Home Address:  <p>  {currentUserInfo.address[0].text}</p>
+                Telephone|Email: {telecom}
+                Status:  <p>  {currentUserInfo.active? 'Active': 'Inactive'}</p>
+                Contact: {contact}
+                Providers: {providerList}
+                {/* Text:  <p>  {currentUserInfo.text.div}</p> */}
             </div>
         )
     }
-}
-const mapStateToProps = (state)=>{
-    return {
-      items: state.items
-    }
-  }
-const mapDispatchToProps= (dispatch)=>{
-    
-    return{
-        // addToCart: (id)=>{dispatch(addToCart(id))}
-    }
-}
+    return getResultSuccess && patientDetails();
 
-export default connect(mapStateToProps,mapDispatchToProps)(Home)
+}
+Detail.defaltProps={};
+Detail.propTypes={
+    getBundleData: PropTypes.func.isRequired
+}
+const mapStateToProps = state=>({
+      usersReducer: state.mainReducer.usersReducer
+  })
+const mapDispatchToProps= dispatch => ({
+    getBundleData: () => dispatch(fetchBundleData())
+});
+// function mapDispatchToProps (dispatch){
+//     return {
+//         getBundleData: () => dispatch(fetchBundleData())
+//     };
+// }
+
+export default connect(mapStateToProps,mapDispatchToProps)(Detail)

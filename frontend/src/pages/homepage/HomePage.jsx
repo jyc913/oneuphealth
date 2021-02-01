@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { addToCart } from '../../reducers/cartActions'
 
  class Home extends Component{
     
@@ -23,13 +22,12 @@ import { addToCart } from '../../reducers/cartActions'
 }
 const mapStateToProps = (state)=>{
     return {
-      items: state.items
+      
     }
   }
 const mapDispatchToProps= (dispatch)=>{
     
     return{
-        addToCart: (id)=>{dispatch(addToCart(id))}
     }
 }
 
