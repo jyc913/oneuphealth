@@ -1,0 +1,16 @@
+[{
+    "username": "jean",
+    "subjectid": "1",
+    "email": "jc@email.com"
+},
+{
+    "username": "John",
+    "subjectid": "2",
+    "email": "jl@email.com"
+},
+{
+    "username": "Thomas",
+    "subjectid": "3",
+    "email": "ts@email.com"
+}
+]

@@ -1,0 +1,35 @@
+version: "3.9"
+services:
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    links:
+      - mongo
+    volumes:
+      - "./frontend/src/:/usr/src/app/src"
+      - "./frontend/public/:/usr/src/app/public"
+
+  mongo:
+    container_name: mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - "shared_database:/data/db"
+
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    ports:
+      - "5000:5000"
+    volumes:
+      - "./backend/:/usr/src/app"
+      - "shared_database:/data/db"
+volumes:
+  shared_database:
