@@ -1,15 +1,5 @@
-# Basic e-commerce cart application built with React & Redux
-
-This simple application prototype shows how we can use React and Redux to build a friendly user experience with instant visual updates.
-
-## Demo
-[Here](https://my-shopping-cart-leawwzhsmf.now.sh/)
-
-## Features
-* Add and remove items 
-* Remove items
-* Edit the quantity of the items in real time
-* Calculate automatically the total including the shipping (if chosen)
+# This an application built with React & Redux
+ 1up health web app to show a patient's information by using react and redux.
 
 # Getting started
 ### Requirements
@@ -27,3 +17,5 @@ npm install
 npm start
 ```
 The application will start automatically in your browser on http://localhost:3000
+
+###  Note: follow the README on the root folder to run frontend, backend, and mongodb.

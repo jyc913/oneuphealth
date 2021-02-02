@@ -5,6 +5,7 @@ import { fetchBundleData} from '../../reducers/users/users.reducer'
 
 const Detail =props=>{
     const {usersReducer,getBundleData} =props;
+  
     let currentUserInfo= {};
     let getResultSuccess=false;
     useEffect(()=>{

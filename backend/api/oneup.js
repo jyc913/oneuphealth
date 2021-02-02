@@ -1,17 +1,15 @@
 // utilities to interface with the 1uphealth api servers side
 const request = require('request');
 const async = require('async');
-const { availableResources } = require('./resourcesConfig');
+const { availableResources } = require('../resourcesConfig');
 
 // const ONEUP_DEMOWEBAPPLOCAL_CLIENTID =
 //   process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTID;
 // const ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET =
 //   process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET;
 
-  const ONEUP_DEMOWEBAPPLOCAL_CLIENTID =
-  process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTID;
-const ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET =
-  process.env.ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET;
+const ONEUP_DEMOWEBAPPLOCAL_CLIENTID ='80efdd5b9252d86124ea88aa5546db7b';
+const ONEUP_DEMOWEBAPPLOCAL_CLIENTSECRET ='bc74f4d4e731e5b7c6ab00e6a516c49b';
 
 let accessTokenCache = {};
 const ROOT_API_URL = `https://api.1up.health`;

@@ -6,8 +6,12 @@ option 1:
 1. Open a terminal
 2. Direct to backend folder
 3. Run `npm install`
-Note: make sure mongo is running first
+Note: make sure mongo is running first (Run `docker-compose up -d` )
 4. Run `npm start`
+
+
+option2: 
+follow the README on the root folder, use docker to run frontend, mongo, and backend
 
 
 

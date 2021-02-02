@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 
 app.use(express.static(__dirname + '/public'));
 
-app.use(session({ secret: 'oneuphealth', cookie: { maxAge: 60000 }, resave: true, saveUninitialized: true, secure: true  }));
+app.use(session({ secret: 'oneuphealth', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: true, secure: true  }));
 
 if (!isProduction) {
   app.use(errorhandler());
