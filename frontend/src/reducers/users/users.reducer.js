@@ -17,7 +17,6 @@ const usersReducer= (state = initState,action)=>{
         };
         
     case SUCCESS(GET_BUNDLE):
-        console.log('get bundle', action.payload);
         return {
             ...state,
             isLoading: false,
@@ -50,7 +49,7 @@ export const resultHasErrored =error=>({
 })
 
 export const fetchBundleData= ()=> dispatch =>{
-    console.log('hello data');
+  
     dispatch(resultRequested(true));
     const url='http://localhost:5000/bundle';
     fetch(url,{

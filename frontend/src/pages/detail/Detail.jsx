@@ -16,7 +16,7 @@ const Detail =props=>{
     if(usersReducer !==undefined && usersReducer.bundle !==undefined && usersReducer.bundle.length >0){
         getResultSuccess=true;
         currentUserInfo=usersReducer.bundle[0].entry[0].resource;
-        console.log('info', currentUserInfo);
+
     }
     function patientDetails(){
        
@@ -64,10 +64,5 @@ const mapStateToProps = state=>({
 const mapDispatchToProps= dispatch => ({
     getBundleData: () => dispatch(fetchBundleData())
 });
-// function mapDispatchToProps (dispatch){
-//     return {
-//         getBundleData: () => dispatch(fetchBundleData())
-//     };
-// }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Detail)
